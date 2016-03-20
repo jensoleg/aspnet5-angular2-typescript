@@ -48,10 +48,9 @@ namespace PhotoGallery
         {
             // Add Entity Framework services to the services container.
             services.AddEntityFramework()
-                .AddSqlServer()
+                .AddSqlite()
                 .AddDbContext<PhotoGalleryContext>(options =>
-                    options.UseSqlServer(Configuration["Data:PhotoGalleryConnection:ConnectionString"]));
-
+                    options.UseSqlite(Configuration["Data:PhotoGalleryConnection:ConnectionString"]));
             // Repositories
             services.AddScoped<IPhotoRepository, PhotoRepository>();
             services.AddScoped<IAlbumRepository, AlbumRepository>();
