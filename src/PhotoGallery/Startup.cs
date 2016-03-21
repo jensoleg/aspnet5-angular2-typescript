@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +16,7 @@ using PhotoGallery.Infrastructure.Services;
 using PhotoGallery.Infrastructure.Mappings;
 using PhotoGallery.Infrastructure.Core;
 using System.Security.Claims;
+using Serilog;
 
 namespace PhotoGallery
 {
@@ -29,8 +31,8 @@ namespace PhotoGallery
             var builder = new ConfigurationBuilder()
                 .SetBasePath(appEnv.ApplicationBasePath)
                 .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);               
+           
             if (env.IsDevelopment())
             {
                 // This reads the configuration keys from the secret store.
@@ -39,6 +41,7 @@ namespace PhotoGallery
             }
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+            
         }
 
         public IConfigurationRoot Configuration { get; set; }
@@ -81,8 +84,22 @@ namespace PhotoGallery
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+            
+                        
+            var logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(Configuration)
+                .MinimumLevel.Debug()
+                .CreateLogger();
+            logger.Information("Hello, world!");
+
+
+            // Add Serilog to the logging pipeline
+            loggerFactory.AddSerilog(logger);
+            
             // Add the platform handler to the request pipeline.
             app.UseIISPlatformHandler();
 
@@ -111,6 +128,7 @@ namespace PhotoGallery
             });
 
             DbInitializer.Initialize(app.ApplicationServices, _applicationPath);
+            
         }
 
         // Entry point for the application.

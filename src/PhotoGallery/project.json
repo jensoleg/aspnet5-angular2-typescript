@@ -5,7 +5,6 @@
     "compilationOptions": {
         "emitEntryPoint": true
     },
-
     "dependencies": {
         "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
         "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
@@ -20,24 +19,32 @@
         "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc1-final",
         "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
         "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final",
+        "Microsoft.Extensions.Logging": "1.0.0-rc1-final",
+        "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
+        "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
+        "Microsoft.Extensions.Logging.TraceSource": "1.0.0-rc1-final",
         "AutoMapper.Data": "1.0.0-beta1",
-        "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final"
+        "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
+        "Serilog.Extensions.Logging": "1.0.0-rc1-final-10092",
+        "Serilog.Sinks.RollingFile": "2.0.0-beta-465",
+        "Serilog.Settings.Configuration": "2.0.0-beta-6",
+        "Serilog.Sinks.Literate": "2.0.0-beta-21",
+        "Serilog.Sinks.File": "2.0.0-beta-507",
+        "Serilog.Enrichers.Environment": "2.0.0-beta-507",
+        "Serilog.Enrichers.Thread": "2.0.0-beta-507"
     },
-
     "commands": {
         "web": "Microsoft.AspNet.Server.Kestrel --server.urls http://0.0.0.0:5000",
         "ef": "EntityFramework.Commands"
     },
-
     "frameworks": {
-        "dnx451": { },
+        "dnx451": {},
         "dnxcore50": {
             "dependencies": {
                 "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
             }
         }
     },
-
     "exclude": [
         "wwwroot",
         "node_modules"
