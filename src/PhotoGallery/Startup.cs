@@ -88,8 +88,7 @@ namespace PhotoGallery
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            
-                        
+                                   
             var logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(Configuration)
                 .MinimumLevel.Debug()

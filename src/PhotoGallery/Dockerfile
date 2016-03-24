@@ -7,5 +7,8 @@ COPY . /app
 WORKDIR /app
 RUN ["dnu", "restore"]
 
-EXPOSE 5000/tcp
+ENV LOG_DIR /var/log
+
+EXPOSE 5000
+
 ENTRYPOINT ["dnx", "-p", "project.json", "web"]

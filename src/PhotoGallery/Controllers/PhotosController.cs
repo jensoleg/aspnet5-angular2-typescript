@@ -8,6 +8,7 @@ using PhotoGallery.ViewModels;
 using AutoMapper;
 using PhotoGallery.Infrastructure.Repositories;
 using PhotoGallery.Infrastructure.Core;
+using Microsoft.Extensions.Logging;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,12 +17,16 @@ namespace PhotoGallery.Controllers
     [Route("api/[controller]")]
     public class PhotosController : Controller
     {
+
         IPhotoRepository _photoRepository;
         ILoggingRepository _loggingRepository;
-        public PhotosController(IPhotoRepository photoRepository, ILoggingRepository loggingRepository)
+        ILogger _logger;
+
+        public PhotosController(IPhotoRepository photoRepository, ILoggingRepository loggingRepository, ILogger<PhotosController> logger)
         {
             _photoRepository = photoRepository;
             _loggingRepository = loggingRepository;
+             _logger = logger;
         }
 
         [HttpGet("{page:int=0}/{pageSize=12}")]
@@ -49,6 +54,8 @@ namespace PhotoGallery.Controllers
 
                 IEnumerable<PhotoViewModel> _photosVM = Mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoViewModel>>(_photos);
 
+                _logger.LogInformation("Photo action requested at {Default} or {$ToString} or {@Object}", _photosVM, _photosVM, _photosVM);
+                
                 pagedSet = new PaginationSet<PhotoViewModel>()
                 {
                     Page = currentPage,

@@ -21,7 +21,7 @@ namespace PhotoGallery.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            _logger.LogInformation("Hello from Home Controller");
+            _logger.LogInformation("Index action requested at {requestTime}", DateTime.Now);
             return View();
         }
     }
