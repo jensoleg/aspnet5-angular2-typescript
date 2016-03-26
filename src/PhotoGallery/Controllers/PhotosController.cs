@@ -55,6 +55,8 @@ namespace PhotoGallery.Controllers
                 IEnumerable<PhotoViewModel> _photosVM = Mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoViewModel>>(_photos);
 
                 _logger.LogInformation("Photo action requested at {Default} or {$ToString} or {@Object}", _photosVM, _photosVM, _photosVM);
+              
+                _logger.LogInformation("Photo action requested test");
                 
                 pagedSet = new PaginationSet<PhotoViewModel>()
                 {
