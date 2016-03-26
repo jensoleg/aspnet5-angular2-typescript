@@ -7,7 +7,7 @@ COPY . /app
 WORKDIR /app
 RUN ["dnu", "restore"]
 
-ENV LOG_DIR /var/log
+ENV LOG_DIR /var/log/.net
 
 EXPOSE 5000
 

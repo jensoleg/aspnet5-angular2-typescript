@@ -91,7 +91,7 @@ namespace PhotoGallery
                                    
             var logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(Configuration)
-                .MinimumLevel.Debug()
+                .MinimumLevel.Information()
                 .CreateLogger();
             logger.Information("Hello, world!");
 
